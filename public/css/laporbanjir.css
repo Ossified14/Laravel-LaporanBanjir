@@ -1,0 +1,429 @@
+/*
+ * LaporBanjir — Stylesheet Utama
+ * BPBD Kabupaten Bandung
+ *
+ * Tema: biru kebencanaan + oranye aksen
+ * Pendekatan: mobile-first, tanpa framework CSS eksternal
+ * Catatan: tidak ada header/footer — kartu konten berada di tengah halaman
+ */
+
+/* ============================================================
+   1. VARIABEL & RESET
+   ============================================================ */
+
+:root {
+    /* Palet utama — biru BPBD */
+    --color-primary:       #1565C0;
+    --color-primary-dark:  #0D47A1;
+    --color-primary-light: #E3F2FD;
+
+    /* Aksen — oranye kebencanaan */
+    --color-accent:        #E65100;
+
+    /* Warna fungsional */
+    --color-success:       #2E7D32;
+    --color-success-bg:    #E8F5E9;
+    --color-error:         #C62828;
+    --color-error-bg:      #FFEBEE;
+    --color-warning:       #E65100;
+    --color-warning-bg:    #FFF3E0;
+
+    /* Tingkat bahaya (teks + latar badge) */
+    --bahaya-rendah-teks:  #1B5E20;
+    --bahaya-rendah-latar: #C8E6C9;
+    --bahaya-rendah-batas: #4CAF50;
+
+    --bahaya-sedang-teks:  #BF360C;
+    --bahaya-sedang-latar: #FFE0B2;
+    --bahaya-sedang-batas: #FF7043;
+
+    --bahaya-tinggi-teks:  #B71C1C;
+    --bahaya-tinggi-latar: #FFCDD2;
+    --bahaya-tinggi-batas: #E53935;
+
+    /* Netral */
+    --color-text:          #212121;
+    --color-text-muted:    #757575;
+    --color-border:        #E0E0E0;
+    --color-bg:            #F0F4F8;
+    --color-white:         #FFFFFF;
+
+    /* Tipografi */
+    --font:       -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-size:  16px;
+    --line:       1.6;
+
+    /* Spacing */
+    --s1: 4px;
+    --s2: 8px;
+    --s3: 16px;
+    --s4: 24px;
+    --s5: 32px;
+    --s6: 48px;
+
+    /* Bentuk */
+    --radius:    10px;
+    --radius-sm: 6px;
+
+    /* Bayangan */
+    --shadow: 0 4px 20px rgba(0, 0, 0, .12);
+}
+
+/* Box-sizing & reset dasar */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: var(--font-size);
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font);
+    line-height: var(--line);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    min-height: 100vh;
+}
+
+/* ============================================================
+   2. PAGE WRAPPER — kartu di tengah halaman
+   ============================================================ */
+
+/*
+ * .page-wrapper menempatkan kartu di tengah layar secara
+ * vertikal dan horizontal, dengan padding aman untuk HP.
+ */
+.page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--s4) var(--s3);
+}
+
+/* ============================================================
+   3. KARTU
+   ============================================================ */
+
+.card {
+    background: var(--color-white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 580px;
+    overflow: hidden;
+}
+
+/* Header kartu default — biru */
+.card-header {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: var(--color-white);
+    padding: var(--s5) var(--s4);
+    text-align: center;
+}
+
+/* Header kartu sukses — hijau gelap */
+.card-header--success {
+    background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%);
+}
+
+.card-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: .01em;
+    margin-bottom: var(--s1);
+}
+
+.card-subtitle {
+    font-size: .9rem;
+    opacity: .9;
+    margin-top: var(--s2);
+}
+
+.card-desc {
+    font-size: .875rem;
+    opacity: .85;
+    margin-top: var(--s2);
+}
+
+.card-body {
+    padding: var(--s5) var(--s4);
+}
+
+/* ============================================================
+   4. FORM
+   ============================================================ */
+
+.form-group {
+    margin-bottom: var(--s4);
+}
+
+.form-label {
+    display: block;
+    font-weight: 600;
+    font-size: .9rem;
+    margin-bottom: var(--s1);
+}
+
+.required-mark {
+    color: var(--color-accent);
+    margin-left: 2px;
+}
+
+/* Input besar — nyaman di layar sentuh */
+.form-input {
+    display: block;
+    width: 100%;
+    padding: 14px var(--s3);
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--color-text);
+    background: var(--color-white);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    transition: border-color .2s, box-shadow .2s;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(21, 101, 192, .18);
+}
+
+/* Field bermasalah */
+.has-error .form-input {
+    border-color: var(--color-error);
+    background: var(--color-error-bg);
+}
+
+.has-error .form-input:focus {
+    box-shadow: 0 0 0 3px rgba(198, 40, 40, .18);
+}
+
+/* Input tinggi genangan + satuan "cm" */
+.input-with-unit {
+    display: flex;
+    align-items: stretch;
+}
+
+.input-with-unit .form-input {
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    flex: 1;
+    min-width: 0;
+}
+
+.unit-label {
+    display: flex;
+    align-items: center;
+    padding: 0 var(--s3);
+    background: var(--color-primary-light);
+    border: 2px solid var(--color-border);
+    border-left: none;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-weight: 600;
+    font-size: .9rem;
+    color: var(--color-primary);
+    white-space: nowrap;
+}
+
+/* Pesan error per field */
+.form-error {
+    color: var(--color-error);
+    font-size: .85rem;
+    margin-top: var(--s2);
+    padding-left: var(--s3);
+    border-left: 3px solid var(--color-error);
+}
+
+/* Teks bantuan di bawah input */
+.form-hint {
+    font-size: .8rem;
+    color: var(--color-text-muted);
+    margin-top: var(--s2);
+}
+
+/* Wadah tombol */
+.form-actions {
+    margin-top: var(--s5);
+}
+
+/* ============================================================
+   5. TOMBOL
+   ============================================================ */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--s2);
+    padding: 14px var(--s5);
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: inherit;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color .2s, transform .1s, opacity .2s;
+    width: 100%;
+    letter-spacing: .02em;
+}
+
+.btn:active {
+    transform: scale(.98);
+}
+
+/* Tombol utama — oranye */
+.btn-primary {
+    background: var(--color-accent);
+    color: var(--color-white);
+}
+
+.btn-primary:hover {
+    background: #BF360C;
+}
+
+.btn-primary:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Tombol sekunder — biru */
+.btn-secondary {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+.btn-secondary:hover {
+    background: var(--color-primary-dark);
+}
+
+/* ============================================================
+   6. BADGE TINGKAT BAHAYA
+   ============================================================ */
+
+/*
+ * Badge teks berwarna murni — tanpa emoji.
+ * Warna latar, teks, dan garis kiri membedakan level bahaya secara visual.
+ */
+.bahaya-badge {
+    display: inline-block;
+    padding: var(--s1) var(--s3);
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: .875rem;
+    margin-top: var(--s2);
+    border-left: 4px solid transparent;
+}
+
+/* Sembunyikan badge saat belum ada nilai (kondisi awal form) */
+.bahaya-hidden {
+    display: none;
+}
+
+.bahaya-rendah {
+    background: var(--bahaya-rendah-latar);
+    color: var(--bahaya-rendah-teks);
+    border-left-color: var(--bahaya-rendah-batas);
+}
+
+.bahaya-sedang {
+    background: var(--bahaya-sedang-latar);
+    color: var(--bahaya-sedang-teks);
+    border-left-color: var(--bahaya-sedang-batas);
+}
+
+/* Bahaya tinggi — animasi denyut untuk menarik perhatian */
+.bahaya-tinggi {
+    background: var(--bahaya-tinggi-latar);
+    color: var(--bahaya-tinggi-teks);
+    border-left-color: var(--bahaya-tinggi-batas);
+    animation: denyut 1.6s ease-in-out infinite;
+}
+
+@keyframes denyut {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: .55; }
+}
+
+/* ============================================================
+   7. RINGKASAN KONFIRMASI (Data List)
+   ============================================================ */
+
+.section-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: var(--s4);
+    padding-bottom: var(--s2);
+    border-bottom: 2px solid var(--color-primary-light);
+}
+
+.data-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.data-row {
+    display: flex;
+    flex-direction: column;
+    padding: var(--s3) 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.data-row:last-child {
+    border-bottom: none;
+}
+
+.data-label {
+    font-size: .75rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    margin-bottom: var(--s1);
+}
+
+.data-value {
+    font-size: 1rem;
+    color: var(--color-text);
+}
+
+/* ============================================================
+   8. RESPONSIF — Layar lebih lebar (>= 560px)
+   ============================================================ */
+
+@media (min-width: 560px) {
+    .card-body {
+        padding: var(--s6) var(--s5);
+    }
+
+    .data-row {
+        flex-direction: row;
+        align-items: baseline;
+        gap: var(--s4);
+    }
+
+    .data-label {
+        min-width: 150px;
+        flex-shrink: 0;
+        margin-bottom: 0;
+    }
+
+    .btn {
+        width: auto;
+        min-width: 200px;
+    }
+}
+

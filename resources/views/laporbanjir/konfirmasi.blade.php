@@ -42,9 +42,9 @@
                     --}}
                     <span class="bahaya-badge bahaya-{{ $tingkat_bahaya }}">
                         @switch($tingkat_bahaya)
-                            @case('rendah')  Rendah (&lt; 30 cm)       @break
-                            @case('sedang')  Sedang (30 &ndash; 100 cm) @break
-                            @case('tinggi')  Tinggi (&gt; 100 cm)      @break
+                            @case('waspada')  Waspada (&lt;= 30 cm)       @break
+                            @case('siaga')  Siaga (31 &ndash; 70 cm) @break
+                            @case('awas')  Awas (&gt; 70 cm)      @break
                         @endswitch
                     </span>
                 </dd>

@@ -34,9 +34,9 @@ document.addEventListener('DOMContentLoaded', function () {
        genangan setiap kali pengguna mengetik angka baru.
 
        Ambang batas (sesuai spesifikasi controller):
-         - < 30 cm    => Rendah (hijau)
-         - 30-100 cm  => Sedang (oranye)
-         - > 100 cm   => Tinggi (merah, berdenyut)
+         - <= 30 cm   => Waspada (hijau)
+         - <= 70 cm   => Siaga (oranye)
+         - > 70 cm    => Awas (merah, berdenyut)
        ========================================================= */
 
     var inputTinggi = document.getElementById('tinggi_genangan');
@@ -51,13 +51,13 @@ document.addEventListener('DOMContentLoaded', function () {
          * @returns {{ level: string, teks: string }}
          */
         function tentukanBahaya(cm) {
-            if (cm < 30) {
-                return { level: 'rendah', teks: 'Tingkat Bahaya: Rendah (< 30 cm)' };
+            if (cm <= 30) {
+                return { level: 'waspada', teks: 'Tingkat Bahaya: Waspada (<= 30 cm)' };
             }
-            if (cm <= 100) {
-                return { level: 'sedang', teks: 'Tingkat Bahaya: Sedang (30 - 100 cm)' };
+            if (cm <= 70) {
+                return { level: 'siaga', teks: 'Tingkat Bahaya: Siaga (31 - 70 cm)' };
             }
-            return { level: 'tinggi', teks: 'Tingkat Bahaya: Tinggi (> 100 cm)' };
+            return { level: 'awas', teks: 'Tingkat Bahaya: Awas (> 70 cm)' };
         }
 
         /**

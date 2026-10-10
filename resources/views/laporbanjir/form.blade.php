@@ -95,7 +95,7 @@
                 <div id="indikator-bahaya" class="bahaya-badge bahaya-hidden" aria-live="polite"></div>
 
                 <p class="form-hint" id="tinggi-hint">
-                    Skala: &lt;30 cm = Rendah &bull; 30&ndash;100 cm = Sedang &bull; &gt;100 cm = Tinggi
+                    Skala: &lt;= 30 cm = Waspada &bull; 31&ndash;70 cm = Siaga &bull; &gt; 70 cm = Awas
                 </p>
 
                 {{-- Pesan error validasi untuk field tinggi_genangan --}}

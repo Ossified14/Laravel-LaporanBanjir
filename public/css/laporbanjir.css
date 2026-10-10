@@ -89,6 +89,8 @@ body {
     color: var(--color-text);
     background-color: var(--color-bg);
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* ============================================================
@@ -101,6 +103,8 @@ body {
  */
 .page-wrapper {
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -330,20 +334,20 @@ body {
     display: none;
 }
 
-.bahaya-rendah {
+.bahaya-waspada {
     background: var(--bahaya-rendah-latar);
     color: var(--bahaya-rendah-teks);
     border-left-color: var(--bahaya-rendah-batas);
 }
 
-.bahaya-sedang {
+.bahaya-siaga {
     background: var(--bahaya-sedang-latar);
     color: var(--bahaya-sedang-teks);
     border-left-color: var(--bahaya-sedang-batas);
 }
 
 /* Bahaya tinggi — animasi denyut untuk menarik perhatian */
-.bahaya-tinggi {
+.bahaya-awas {
     background: var(--bahaya-tinggi-latar);
     color: var(--bahaya-tinggi-teks);
     border-left-color: var(--bahaya-tinggi-batas);
@@ -427,3 +431,110 @@ body {
     }
 }
 
+/* ============================================================
+   9. HEADER, NAV & FOOTER
+   ============================================================ */
+
+.site-header {
+    background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+    color: var(--color-white);
+    padding: var(--s3) var(--s4);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.header-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s3);
+}
+
+.header-brand h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.header-brand span {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: var(--s2);
+}
+
+.nav-menu a {
+    color: var(--color-white);
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.2s;
+    display: inline-block;
+}
+
+.nav-menu a:hover, .nav-menu a.active {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    border-color: var(--color-accent);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.site-footer {
+    background-color: var(--color-primary-dark);
+    color: var(--color-white);
+    text-align: center;
+    padding: var(--s4);
+    font-size: 0.85rem;
+    opacity: 0.9;
+    margin-top: auto;
+}
+
+/* ============================================================
+   10. DAFTAR LAPORAN (GRID)
+   ============================================================ */
+
+.container-laporan {
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.laporan-header {
+    margin-bottom: var(--s4);
+    text-align: center;
+}
+
+.laporan-header h1 {
+    color: var(--color-primary-dark);
+}
+
+.laporan-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s4);
+}
+
+@media (min-width: 768px) {
+    .laporan-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.laporan-empty {
+    text-align: center;
+    padding: var(--s6);
+    background: var(--color-white);
+    border-radius: var(--radius);
+    color: var(--color-text-muted);
+}

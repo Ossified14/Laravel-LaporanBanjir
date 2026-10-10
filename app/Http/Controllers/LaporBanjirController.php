@@ -8,6 +8,38 @@ use Illuminate\View\View;
 class LaporBanjirController extends Controller
 {
 
+    public function index(): View
+    {
+        $laporans = [
+            [
+                'nama' => 'Budi Santoso',
+                'lokasi' => 'Kec. Baleendah, Desa Andir',
+                'tinggi_genangan' => 20,
+                'waktu' => '2026-10-08 10:00',
+            ],
+            [
+                'nama' => 'Siti Aminah',
+                'lokasi' => 'Kec. Dayeuhkolot, Desa Citeureup',
+                'tinggi_genangan' => 50,
+                'waktu' => '2026-10-08 11:30',
+            ],
+            [
+                'nama' => 'Agus Rahman',
+                'lokasi' => 'Kec. Bojongsoang',
+                'tinggi_genangan' => 85,
+                'waktu' => '2026-10-08 12:15',
+            ],
+            [
+                'nama' => 'Maya Sari',
+                'lokasi' => 'Kec. Majalaya',
+                'tinggi_genangan' => 70,
+                'waktu' => '2026-10-08 13:00',
+            ],
+        ];
+
+        return view('laporbanjir.index', compact('laporans'));
+    }
+
     public function create(): View
     {
         return view('laporbanjir.form');
@@ -40,9 +72,9 @@ class LaporBanjirController extends Controller
         $tinggi = (float) $dataValid['tinggi_genangan'];
 
         $tingkatBahaya = match (true) {
-            $tinggi < 30 => 'rendah',
-            $tinggi <= 100 => 'sedang',
-            default => 'tinggi',
+            $tinggi <= 30 => 'waspada',
+            $tinggi <= 70 => 'siaga',
+            default => 'awas',
         };
         
         return view('laporbanjir.konfirmasi', [

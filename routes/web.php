@@ -13,3 +13,7 @@ Route::get('/lapor-banjir', [LaporBanjirController::class, 'create'])
 // Proses pengiriman laporan banjir
 Route::post('/lapor-banjir', [LaporBanjirController::class, 'store'])
     ->name('laporbanjir.store');
+
+// Halaman daftar laporan
+Route::get('/daftar-laporan', [LaporBanjirController::class, 'index'])
+    ->name('laporbanjir.index');

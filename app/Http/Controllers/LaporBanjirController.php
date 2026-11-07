@@ -4,66 +4,55 @@ namespace App\Http\Controllers;
 
 use App\Models\Laporan;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
 class LaporBanjirController extends Controller
 {
-    public function index(): View
-    {
-        $laporans = Laporan::all();
-
-        return view('laporbanjir.index', compact('laporans'));
-    }
-
-    public function create(): View
+    // Publik: form laporan warga
+    public function create()
     {
         return view('laporbanjir.form');
     }
 
-    public function store(Request $request): View
+    // Publik: simpan laporan warga
+    public function store(Request $request)
     {
-        $dataValid = $request->validate(
-            [
-                'nama'            => ['required', 'string', 'min:3', 'max:100'],
-                'lokasi'          => ['required', 'string', 'max:150'],
-                'tinggi_genangan' => ['required', 'numeric', 'min:1', 'max:500'],
-            ],
-            [
-                'nama.required'            => 'Nama pelapor wajib diisi.',
-                'nama.string'              => 'Nama pelapor harus berupa teks.',
-                'nama.min'                 => 'Nama pelapor minimal :min karakter.',
-                'nama.max'                 => 'Nama pelapor maksimal :max karakter.',
-                'lokasi.required'          => 'Lokasi kejadian wajib diisi.',
-                'lokasi.string'            => 'Lokasi kejadian harus berupa teks.',
-                'lokasi.max'               => 'Lokasi kejadian maksimal :max karakter.',
-                'tinggi_genangan.required' => 'Tinggi genangan air wajib diisi.',
-                'tinggi_genangan.numeric'  => 'Tinggi genangan harus berupa angka.',
-                'tinggi_genangan.min'      => 'Tinggi genangan minimal :min cm.',
-                'tinggi_genangan.max'      => 'Tinggi genangan maksimal :max cm.',
-            ]
-        );
+        $dataValid = $request->validate([
+            'nama_pelapor' => ['required', 'string', 'min:3', 'max:100'],
+            'no_hp'        => ['required', 'string', 'max:20'],
+            'lokasi'       => ['required', 'string', 'max:150'],
+            'kecamatan'    => ['required', 'string', 'max:100'],
+            'tinggi_air'   => ['required', 'numeric', 'min:1', 'max:500'],
+            'keterangan'   => ['nullable', 'string', 'max:1000'],
+            'foto'         => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
+        ], [
+            'nama_pelapor.required' => 'Nama pelapor wajib diisi.',
+            'nama_pelapor.min'      => 'Nama pelapor minimal :min karakter.',
+            'no_hp.required'        => 'Nomor HP wajib diisi.',
+            'lokasi.required'       => 'Lokasi kejadian wajib diisi.',
+            'kecamatan.required'    => 'Kecamatan wajib diisi.',
+            'tinggi_air.required'   => 'Tinggi air wajib diisi.',
+            'tinggi_air.numeric'    => 'Tinggi air harus berupa angka.',
+            'tinggi_air.min'        => 'Tinggi air minimal :min cm.',
+            'foto.required'         => 'Foto bukti wajib diunggah.',
+            'foto.image'            => 'File harus berupa gambar.',
+            'foto.mimes'            => 'Format foto harus jpg, jpeg, atau png.',
+            'foto.max'              => 'Ukuran foto maksimal 2 MB.',
+        ]);
 
-        $tinggi = (float) $dataValid['tinggi_genangan'];
+        $fotoPath = $request->file('foto')->store('laporan', 'public');
 
-        // Simpan ke database
         Laporan::create([
-            'nama_pelapor'    => $dataValid['nama'],
-            'lokasi'          => $dataValid['lokasi'],
-            'tinggi_genangan' => $tinggi,
-            'tanggal_kejadian'=> now()->toDateString(),
+            'nama_pelapor' => $dataValid['nama_pelapor'],
+            'no_hp'        => $dataValid['no_hp'],
+            'lokasi'       => $dataValid['lokasi'],
+            'kecamatan'    => $dataValid['kecamatan'],
+            'tinggi_air'   => $dataValid['tinggi_air'],
+            'keterangan'   => $dataValid['keterangan'] ?? null,
+            'foto'         => $fotoPath,
+            'status'       => 'Menunggu',
         ]);
 
-        $tingkatBahaya = match (true) {
-            $tinggi <= 30 => 'waspada',
-            $tinggi <= 70 => 'siaga',
-            default       => 'awas',
-        };
-
-        return view('laporbanjir.konfirmasi', [
-            'nama'            => $dataValid['nama'],
-            'lokasi'          => $dataValid['lokasi'],
-            'tinggi_genangan' => $dataValid['tinggi_genangan'],
-            'tingkat_bahaya'  => $tingkatBahaya,
-        ]);
+        return redirect()->route('laporbanjir.create')
+            ->with('success', 'Laporan banjir berhasil dikirim. Terima kasih!');
     }
 }

@@ -3,21 +3,19 @@
     <ul>
         <li>
             <a href="{{ route('laporbanjir.create') }}"
-               class="{{ request()->routeIs('laporbanjir.create') ? 'active' : '' }}">
+                class="{{ request()->routeIs('laporbanjir.create') ? 'active' : '' }}">
                 Buat Laporan
             </a>
         </li>
 
         @auth
             <li>
-                <a href="{{ route('laporbanjir.index') }}"
-                   class="{{ request()->routeIs('laporbanjir.index') ? 'active' : '' }}">
+                <a href="{{ route('laporan.index') }}" class="{{ request()->routeIs('laporan.*') ? 'active' : '' }}">
                     Daftar Laporan
                 </a>
             </li>
             <li>
-                <a href="{{ route('profile') }}"
-                   class="{{ request()->routeIs('profile') ? 'active' : '' }}">
+                <a href="{{ route('profile') }}" class="{{ request()->routeIs('profile') ? 'active' : '' }}">
                     Profil Petugas
                 </a>
             </li>
@@ -31,14 +29,12 @@
 
         @guest
             <li>
-                <a href="{{ route('login.form') }}"
-                   class="{{ request()->routeIs('login.form') ? 'active' : '' }}">
+                <a href="{{ route('login.form') }}" class="{{ request()->routeIs('login.form') ? 'active' : '' }}">
                     Login
                 </a>
             </li>
             <li>
-                <a href="{{ route('register.form') }}"
-                   class="{{ request()->routeIs('register.form') ? 'active' : '' }}">
+                <a href="{{ route('register.form') }}" class="{{ request()->routeIs('register.form') ? 'active' : '' }}">
                     Register
                 </a>
             </li>

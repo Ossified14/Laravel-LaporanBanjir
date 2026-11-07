@@ -39,6 +39,6 @@ class RegisterController extends Controller
         Auth::login($user);
 
         // Redirect ke halaman dashboard
-        return redirect()->route('laporbanjir.index');
+        return redirect()->route('laporan.index');
     }
 }
